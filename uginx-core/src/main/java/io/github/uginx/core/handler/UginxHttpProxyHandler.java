@@ -17,21 +17,6 @@ import org.apache.commons.lang3.StringUtils;
  */
 public class UginxHttpProxyHandler extends SimpleChannelInboundHandler<FullHttpRequest> {
 
-    /**
-     * 代理的地址
-     */
-    private String host;
-
-    /**
-     * 代理的端口
-     */
-    private Integer port;
-
-    public UginxHttpProxyHandler(String host, Integer port) {
-        this.host = host;
-        this.port = port;
-    }
-
     @Override
     protected void channelRead0(final ChannelHandlerContext ctx, final FullHttpRequest fullHttpRequest) throws Exception {
 

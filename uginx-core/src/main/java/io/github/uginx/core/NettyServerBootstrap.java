@@ -33,7 +33,7 @@ public class NettyServerBootstrap {
     private ChannelFuture future;
 
     @SneakyThrows({InterruptedException.class})
-    public void start(final String host, final Integer port){
+    public void start(){
         serverBootstrap.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
@@ -45,7 +45,7 @@ public class NettyServerBootstrap {
                         pipeline.addLast(new HttpServerCodec());
                         pipeline.addLast(new HttpObjectAggregator(100*1024*1024));
                         //Http代理服务
-                        pipeline.addLast(new UginxHttpProxyHandler(host,port));
+                        pipeline.addLast(new UginxHttpProxyHandler());
                     }
                 });
         future = serverBootstrap.bind(bindPort).sync();
@@ -53,6 +53,10 @@ public class NettyServerBootstrap {
         future.channel().closeFuture().sync();
         log.info("netty proxy server has started. proxy is effective");
         log.info("now you can visited the proxy address {}:{} >>>>> {}:{} ","localhost",bindPort,host,port);
+    }
+
+    public void proxy(String host,Integer port){
+        this.serverBootstrap.register()
     }
 
     public void stop(){
