@@ -54,4 +54,8 @@ public class CommonResp<T> {
     private static <T> CommonResp<T> Failure(Integer code, String msg, T data) {
         return new CommonResp<>(code,msg,data);
     }
+
+    public static CommonResp of(StatusCode statusCode, Object ret) {
+        return new CommonResp(statusCode.getCode(),statusCode.getMsg(),ret);
+    }
 }

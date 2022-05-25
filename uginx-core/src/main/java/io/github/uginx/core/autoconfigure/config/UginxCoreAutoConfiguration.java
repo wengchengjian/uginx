@@ -1,9 +1,8 @@
 package io.github.uginx.core.autoconfigure.config;
 
 
-import io.github.uginx.core.autoconfigure.properties.UginxCoreProperties;
-import io.github.uginx.core.protocol.handler.ProxyMessageDecoder;
-import io.github.uginx.core.protocol.handler.ProxyMessageEncoder;
+import io.github.uginx.core.protocol.handler.*;
+import io.github.uginx.core.support.HandlerDispatcher;
 import io.github.uginx.core.support.factory.CompressFactory;
 import io.github.uginx.core.support.factory.SerializerFactory;
 import io.github.uginx.core.utils.compress.Compress;
@@ -19,6 +18,7 @@ import org.springframework.context.annotation.Configuration;
  * @Date 2022/4/26 22:15
  * @Version 1.0.0
  */
+
 @Configuration
 public class UginxCoreAutoConfiguration {
 
@@ -79,4 +79,31 @@ public class UginxCoreAutoConfiguration {
     public ProxyMessageEncoder proxyMessageEncoder(){
         return new ProxyMessageEncoder();
     }
+
+    /**
+     * 心跳请求处理器
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public HeartBeatRespHandler heartBeatRespHandler(){
+        return new HeartBeatRespHandler();
+    }
+
+    /**
+     * 心跳响应处理器
+     * @return
+     */
+    @Bean
+    @ConditionalOnMissingBean
+    public HeartBeatReqHandler heartBeatReqHandler(){
+        return new HeartBeatReqHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public IdeaCheckHandler ideaCheckHandler(){
+        return new IdeaCheckHandler();
+    }
+
 }

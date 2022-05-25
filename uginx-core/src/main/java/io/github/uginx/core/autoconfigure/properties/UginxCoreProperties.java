@@ -14,8 +14,8 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 @ConfigurationProperties(prefix = "uginx.core")
 public class UginxCoreProperties {
 
-    public String compress;
+    public String compress = "gzip";
 
-    public String codec;
+    public String codec = "kyro";
 
 }

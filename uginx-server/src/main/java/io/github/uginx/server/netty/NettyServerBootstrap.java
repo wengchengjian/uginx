@@ -1,16 +1,21 @@
 package io.github.uginx.server.netty;
 
-import io.github.uginx.server.netty.handler.UginxHttpProxyHandler;
+import io.github.uginx.core.model.Container;
+import io.github.uginx.core.protocol.handler.IdeaCheckHandler;
+import io.github.uginx.core.protocol.handler.ProxyMessageDecoder;
+import io.github.uginx.core.protocol.handler.ProxyMessageEncoder;
+import io.github.uginx.server.config.ServerProxyProperties;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpServerCodec;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author 翁丞健
@@ -18,20 +23,36 @@ import lombok.extern.slf4j.Slf4j;
  * @Version 1.0.0
  */
 @Slf4j
-public class NettyServerBootstrap {
+@Component
+@RequiredArgsConstructor
+public class NettyServerBootstrap implements Container {
 
-    private NioEventLoopGroup bossGroup = new NioEventLoopGroup();
+    @NonNull
+    private final ServerProxyProperties properties;
+    @NonNull
+    private final NioEventLoopGroup bossGroup;
+    @NonNull
+    private final NioEventLoopGroup workGroup;
+    @NonNull
+    private final ServerBootstrap serverBootstrap;
 
-    private NioEventLoopGroup workGroup = new NioEventLoopGroup();
+    @NonNull
+    private final ProxyMessageDecoder decoder;
 
-    private ServerBootstrap serverBootstrap = new ServerBootstrap();
+    @NonNull
+    private final ProxyMessageEncoder encoder;
+    @NonNull
+    private final IdeaCheckHandler ideaCheckHandler;
 
-    private Integer bindPort = 8787;
+    @NonNull
+    private final ServerProxyHandler proxyHandler;
 
     private ChannelFuture future;
 
     @SneakyThrows({InterruptedException.class})
     public void start(){
+        int port = properties.getPort();
+
         serverBootstrap.group(bossGroup,workGroup)
                 .channel(NioServerSocketChannel.class)
                 .option(ChannelOption.SO_BACKLOG, 1024)
@@ -39,17 +60,16 @@ public class NettyServerBootstrap {
                     @Override
                     protected void initChannel(SocketChannel socketChannel) throws Exception {
                         ChannelPipeline pipeline = socketChannel.pipeline();
-                        //Http编解码器
-                        pipeline.addLast(new HttpServerCodec());
-                        pipeline.addLast(new HttpObjectAggregator(100*1024*1024));
-                        //Http代理服务
-                        pipeline.addLast(new UginxHttpProxyHandler());
+                        pipeline.addLast(decoder);
+                        pipeline.addLast(encoder);
+                        pipeline.addLast(ideaCheckHandler);
+                        pipeline.addLast(proxyHandler);
                     }
                 });
-        future = serverBootstrap.bind(bindPort).sync();
+        future = serverBootstrap.bind(port).sync();
 
         future.channel().closeFuture().sync();
-        log.info("netty proxy server has started on {}. proxy is effective",bindPort);
+        log.info("netty proxy server has started on {}. proxy is effective",port);
     }
     public void stop(){
         log.info("waiting for the last data send finished.");

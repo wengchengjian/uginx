@@ -4,7 +4,50 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2db594-3f7f-471c-adb0-5a8d59c80dd6" name="变更" comment="fix:修改项目信息" />
+    <list default="true" id="ee2db594-3f7f-471c-adb0-5a8d59c80dd6" name="变更" comment="fix:修改项目信息">
+      <change afterPath="$PROJECT_DIR$/.idea/google-java-format.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/config/ClientProxyConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/config/ClientProxyProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/ProxyClientChannelContextHolder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/handler/resp/ClientAuthRespHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/handler/resp/ClientProxyRespHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/annotation/Handler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/exception/HandlerNotFountException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/Container.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/HeartBeatReqHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/HeartBeatRespHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/IdeaCheckHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/HandlerDispatcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/ProxyDispatcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/config/ServerProxyConfiguration.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/config/ServerProxyProperties.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/ProxyClientChannelManager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ClientAuthReqHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ClientProxyReqHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/support/ContainerHelper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/utils/ArgValidationUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/ClientProxyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/ClientProxyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/NettyClientBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/NettyClientBootstrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/annotation/EnableProxyCommonModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/annotation/EnableProxyCoreModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/config/UginxCoreAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/config/UginxCoreAutoConfiguration.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/properties/UginxCoreProperties.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/properties/UginxCoreProperties.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/constants/RequestType.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/constants/RequestType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/CommonResp.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/CommonResp.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/ProxyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/ProxyRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/ProxyMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/ProxyMessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/handler/ServiceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/handler/ServiceHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/ServerProxyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/ServerProxyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/UginxHttpProxyHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/UginxHttpProxyHandler.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +56,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="AnnotationType" />
+        <option value="Interface" />
         <option value="Class" />
       </list>
     </option>
@@ -39,21 +84,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
-    &quot;last_opened_file_path&quot;: &quot;F:/repository/uginx/uginx-core/src/main/java/io/github/uginx/core&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "jdk.selected.JAVA_MODULE": "11",
+    "last_opened_file_path": "F:/repository/uginx/uginx-core/src/main/java/io/github/uginx/core",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "项目",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0",
+    "settings.editor.selected.configurable": "preferences.lookFeel",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\repository\uginx\uginx-core\src\main\java\io\github\uginx\core" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="io.github.uginx.core.support" />
+      <recent name="io.github.uginx.server.netty.handler" />
+      <recent name="io.github.uginx.core.protocol.handler" />
     </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="应用程序级" UseSingleDictionary="true" transferred="true" />
@@ -72,6 +127,8 @@
       <updated>1653398809392</updated>
       <workItem from="1653398811506" duration="5638000" />
       <workItem from="1653404505643" duration="87000" />
+      <workItem from="1653442412435" duration="2136000" />
+      <workItem from="1653445857560" duration="15435000" />
     </task>
     <task id="LOCAL-00001" summary="fix:修改项目信息">
       <created>1653399146868</created>

@@ -13,7 +13,28 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ProxyRequest {
-    private String host;
+    /**
+     * 需要代理的地址
+     */
+    private String proxyHost;
 
-    private Integer port;
+    /**
+     * 需要代理的端口
+     */
+    private Integer proxyPort;
+
+    /**
+     * 期待代理后的端口
+     */
+    private Integer expectPort;
+
+    /**
+     * 期待代理后的地址
+     */
+    private String expectHost;
+
+    /**
+     * 客户端Key
+     */
+    private String clientKey;
 }

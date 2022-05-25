@@ -1,5 +1,6 @@
 package io.github.uginx.core.protocol.handler;
 
+import io.github.uginx.core.autoconfigure.annotation.Handler;
 import io.github.uginx.core.constants.MessageConstant;
 import io.github.uginx.core.constants.RequestType;
 import io.github.uginx.core.exception.NotSupportProtocolException;
@@ -32,9 +33,6 @@ public class ProxyMessageDecoder extends LengthFieldBasedFrameDecoder {
 
     @Autowired
     private CompressFactory compressFactory;
-
-    @Autowired
-    private RequestFactory requestFactory;
 
     private static final int MAX_FRAME_SIZE  = 2*1024*1024;
 

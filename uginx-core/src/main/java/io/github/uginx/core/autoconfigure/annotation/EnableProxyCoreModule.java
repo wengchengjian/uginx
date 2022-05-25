@@ -3,6 +3,7 @@ package io.github.uginx.core.autoconfigure.annotation;
 import io.github.uginx.core.autoconfigure.config.UginxCoreAutoConfiguration;
 import io.github.uginx.core.autoconfigure.properties.UginxCoreProperties;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Import;
 
 
@@ -18,6 +19,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @EnableConfigurationProperties(UginxCoreProperties.class)
 @Import(UginxCoreAutoConfiguration.class)
-public @interface EnableProxyCommonModule {
+@ComponentScan(basePackages = "io.github.uginx.core.support")
+public @interface EnableProxyCoreModule {
 
 }

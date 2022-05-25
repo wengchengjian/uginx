@@ -52,7 +52,7 @@ public enum RequestType {
     /**
      * 心跳响应包
      */
-    HEART_BEAT_RESPONSE((byte) 10,CommonResp.class);
+    HEART_BEAT_RESPONSE((byte) 10,String.class);
 
     private final byte code;
 

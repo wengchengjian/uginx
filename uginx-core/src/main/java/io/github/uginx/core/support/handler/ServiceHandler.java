@@ -3,10 +3,14 @@ package io.github.uginx.core.support.handler;
 
 import io.github.uginx.core.constants.RequestType;
 import io.github.uginx.core.constants.StatusCode;
+import io.github.uginx.core.model.CommonResp;
+import io.github.uginx.core.protocol.message.Message;
 import io.netty.channel.ChannelHandlerContext;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static io.github.uginx.core.constants.StatusCode.Failure;
+import static io.github.uginx.core.constants.StatusCode.SUCCESS;
 
 
 /**
@@ -29,19 +33,53 @@ public interface ServiceHandler<T> {
     }
 
 
-    default void handle(ChannelHandlerContext ctx, T proxyMessage){
+    default void handle(ChannelHandlerContext ctx, T message){
             try{
-                doService(ctx,  proxyMessage);
+                doService(ctx,  message);
             }catch (Exception e){
                 log.error("处理异常:{}", e);
                 exceptinCaguht(ctx, e);
             }
     }
 
-    void doService(ChannelHandlerContext ctx, T proxyMessage);
+    void doService(ChannelHandlerContext ctx, T message);
 
     default void exceptinCaguht(ChannelHandlerContext ctx, Throwable cause){
         log.error("关闭连接:{}", cause);
         ctx.close();
     }
+
+    default RequestType getReturnType(){
+        return null;
+    }
+
+    default void success(ChannelHandlerContext ctx, Object returnMessage){
+        success(ctx,SUCCESS, returnMessage);
+    }
+
+    default void success(ChannelHandlerContext ctx, StatusCode statusCode,Object returnMessage){
+        ctx.writeAndFlush(getResponse(statusCode,returnMessage));
+    }
+
+    default void success(ChannelHandlerContext ctx, StatusCode statusCode){
+        success(ctx,statusCode);
+    }
+
+    default Message getResponse(StatusCode statusCode, Object ret){
+        return Message.getDefaultMessage(CommonResp.of(statusCode,ret),getReturnType().getCode());
+
+    }
+
+    default void failure(ChannelHandlerContext ctx, String returnMessage){
+        failure(ctx,Failure,returnMessage);
+    }
+
+    default void failure(ChannelHandlerContext ctx, StatusCode statusCode, String returnMessage){
+        ctx.writeAndFlush(getResponse(statusCode,returnMessage));
+    }
+
+    default void failure(ChannelHandlerContext ctx, StatusCode statusCode){
+        failure(ctx, statusCode,null);
+    }
+
 }
