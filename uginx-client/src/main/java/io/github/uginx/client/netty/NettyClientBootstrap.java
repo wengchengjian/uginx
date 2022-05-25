@@ -6,11 +6,14 @@ import io.github.uginx.core.model.Container;
 import io.github.uginx.core.protocol.handler.ProxyMessageDecoder;
 import io.github.uginx.core.protocol.handler.ProxyMessageEncoder;
 import io.github.uginx.core.protocol.message.Message;
+import io.github.uginx.core.support.HandlerDispatcher;
 import io.netty.bootstrap.Bootstrap;
+import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -26,19 +29,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class NettyClientBootstrap implements Container {
 
+    @NonNull
     private final Bootstrap bootstrap;
-
+    @NonNull
     private final NioEventLoopGroup workGroup;
-
+    @NonNull
     private final ClientProxyProperties properties;
-
+    @NonNull
     private final ProxyMessageEncoder messageEncoder;
-
+    @NonNull
     private final ProxyMessageDecoder messageDecoder;
-
+    @NonNull
     private final HandlerDispatcher handlerDispatcher;
-
-    private Channel channel;
 
     @Override
     @SneakyThrows(InterruptedException.class)
@@ -61,7 +63,7 @@ public class NettyClientBootstrap implements Container {
                         // 保存客户端-服务端连接
                         ProxyClientChannelContextHolder.setChannel(future.channel());
                         // 建立连接以后发送认证请求
-                        sendAuthData(channel,properties.getClientKey());
+                        sendAuthData(ProxyClientChannelContextHolder.getChannel(),properties.getClientKey());
                     }
                 }
 
@@ -76,6 +78,12 @@ public class NettyClientBootstrap implements Container {
 
     @Override
     public synchronized void stop() {
-
+        Channel channel = ProxyClientChannelContextHolder.getChannel();
+        if(channel!=null){
+            channel.writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(ChannelFutureListener.CLOSE);
+            workGroup.shutdownGracefully();
+            return;
+        }
+        log.error("you are not started client");
     }
 }

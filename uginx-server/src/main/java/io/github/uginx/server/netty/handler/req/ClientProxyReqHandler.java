@@ -6,9 +6,11 @@ import io.github.uginx.core.constants.StatusCode;
 import io.github.uginx.core.model.ProxyRequest;
 import io.github.uginx.core.protocol.message.Message;
 import io.github.uginx.core.support.handler.ServiceHandler;
+import io.github.uginx.server.config.ServerProxyProperties;
 import io.github.uginx.server.netty.ProxyClientChannelManager;
 import io.github.uginx.server.netty.handler.DataTransHandler;
 import io.github.uginx.server.support.ContainerHelper;
+import io.github.uginx.server.utils.ArgValidationUtil;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.Unpooled;
 import io.netty.channel.*;
@@ -21,6 +23,7 @@ import io.netty.util.CharsetUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
+import static io.github.uginx.core.constants.StatusCode.Failure;
 import static io.github.uginx.core.constants.StatusCode.SUCCESS;
 
 /**
@@ -31,6 +34,8 @@ import static io.github.uginx.core.constants.StatusCode.SUCCESS;
 @Handler
 @RequiredArgsConstructor
 public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyRequest>> {
+
+    private final ServerProxyProperties properties;
 
     private final ContainerHelper containerHelper;
 
@@ -51,9 +56,9 @@ public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyReques
 
         ProxyRequest proxyRequest = message.getData();
 
-        String expectHost = proxyRequest.getExpectHost();
+        String expectHost = getServerHost(proxyRequest.getExpectHost());
 
-        Integer expectPort = proxyRequest.getExpectPort();
+        Integer expectPort = getServerPort(proxyRequest.getExpectPort());
 
         String proxyHost = proxyRequest.getProxyHost();
 
@@ -62,16 +67,48 @@ public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyReques
         String clientKey = proxyRequest.getClientKey();
 
         // 创建代理server
-        ChannelFuture server = containerHelper.registerProxyServer(expectHost, expectPort);
-        // 保存新开启的代理server的channel
-        ProxyClientChannelManager.addClientProxyChannel(clientKey,expectHost,expectPort,server.channel());
+        containerHelper.registerProxyServer(expectHost, expectPort).addListener(new ChannelFutureListener() {
+            @Override
+            public void operationComplete(ChannelFuture server) throws Exception {
+                if(server.isSuccess()){
+                    // 保存新开启的代理server的channel
+                    ProxyClientChannelManager.addClientProxyChannel(clientKey,expectHost,expectPort,server.channel());
+                    // 连接到目标服务器
+                    connectToTarget(server.channel(), proxyHost, proxyPort, TIME_OUT).addListener(new ChannelFutureListener() {
+                        @Override
+                        public void operationComplete(ChannelFuture future) throws Exception {
+                            if(future.isSuccess()){
+                                // 给代理server新增处理器
+                                server.channel().pipeline().addLast(new DataTransHandler(future.channel()));
+                                // 返回数据
+                                success(ctx, SUCCESS,String.format("%s:%d now is proxyed by %s:%d",proxyHost,proxyPort,expectHost,expectPort));
+                            }else{
+                                failure(ctx,Failure,String.format("{}:{} proxy failed",proxyHost,proxyPort));
+                            }
+                        }
+                    });
+                }else{
+                    failure(ctx,Failure,String.format("{}:{} proxy failed",proxyHost,proxyPort));
+                }
+            }
+        });
+
         // 连接目标服务器
-        ChannelFuture target = connectToTarget(server.channel(), proxyHost, proxyPort, TIME_OUT);
-        // 给代理server新增处理器
-        server.channel().pipeline().addLast(new DataTransHandler(target.channel()));
 
-        success(ctx, SUCCESS);
 
+
+
+    }
+
+    private Integer getServerPort(Integer expectPort) {
+        return ArgValidationUtil.getRandomPort();
+    }
+
+    private String getServerHost(String expectHost) {
+        if(expectHost!=null){
+            return expectHost;
+        }
+        return "localhost";
     }
 
     private ChannelFuture connectToTarget(final Channel channel, String host, int port, int  timeout){

@@ -19,7 +19,7 @@ import java.lang.annotation.*;
 @Target(ElementType.TYPE)
 @EnableConfigurationProperties(UginxCoreProperties.class)
 @Import(UginxCoreAutoConfiguration.class)
-@ComponentScan(basePackages = "io.github.uginx.core.support")
+@ComponentScan(basePackages = {"io.github.uginx.core.support","io.github.uginx.core.utils"})
 public @interface EnableProxyCoreModule {
 
 }

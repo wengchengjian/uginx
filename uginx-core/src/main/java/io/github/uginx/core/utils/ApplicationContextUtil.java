@@ -4,6 +4,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 /**
  * @Author 翁丞健
@@ -12,14 +13,14 @@ import org.springframework.context.ApplicationContextAware;
  */
 @Slf4j
 public class ApplicationContextUtil implements ApplicationContextAware {
-    private static ApplicationContext applicationContext;
+    private  ApplicationContext applicationContext;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        ApplicationContextUtil.applicationContext = applicationContext;
+        this.applicationContext = applicationContext;
     }
 
-    public static final ApplicationContext getContext(){
+    public  final ApplicationContext getContext(){
         if(applicationContext==null){
             log.warn("获取applicationContext失败,请检查当前是否已经初始化或者调用时机不对");
         }

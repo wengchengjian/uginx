@@ -1,6 +1,7 @@
 package io.github.uginx.client;
 
 import io.github.uginx.client.config.ClientProxyProperties;
+import io.github.uginx.core.autoconfigure.annotation.EnableProxyCoreModule;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
@@ -11,6 +12,7 @@ import org.springframework.boot.context.properties.EnableConfigurationProperties
  * @Version 1.0.0
  */
 @SpringBootApplication
+@EnableProxyCoreModule
 @EnableConfigurationProperties(ClientProxyProperties.class)
 public class ClientProxyApplication {
     public static void main(String[] args) {

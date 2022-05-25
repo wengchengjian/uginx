@@ -4,6 +4,7 @@ package io.github.uginx.core.support.factory;
 import io.github.uginx.core.support.handler.ServiceHandler;
 import io.github.uginx.core.utils.ApplicationContextUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -22,9 +23,12 @@ public class RequestFactory {
 
     private  final Map<Byte,Class<?>> requestHolderMap = new ConcurrentHashMap<>();
 
+    @Autowired
+    private ApplicationContextUtil applicationContextUtil;
+
     @PostConstruct
     public void init(){
-        ApplicationContext context = ApplicationContextUtil.getContext();
+        ApplicationContext context = applicationContextUtil.getContext();
         Map<String, ServiceHandler> beansOfType = context.getBeansOfType(ServiceHandler.class);
 
         //TODO

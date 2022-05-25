@@ -4,6 +4,7 @@ import io.github.uginx.core.constants.CodecEnum;
 import io.github.uginx.core.utils.ApplicationContextUtil;
 import io.github.uginx.core.utils.serialize.Serializer;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
@@ -24,9 +25,12 @@ public class SerializerFactory  {
 
     private ConcurrentHashMap<Byte, Serializer> serializerMap = new ConcurrentHashMap<>();
 
+    @Autowired
+    private ApplicationContextUtil applicationContextUtil;
+
     @PostConstruct
     public void init(){
-        ApplicationContext context = ApplicationContextUtil.getContext();
+        ApplicationContext context = applicationContextUtil.getContext();
 
         Map<String, Serializer> allSerializers = context.getBeansOfType(Serializer.class);
 

@@ -64,22 +64,27 @@ public interface ServiceHandler<T> {
     default void success(ChannelHandlerContext ctx, StatusCode statusCode){
         success(ctx,statusCode);
     }
+    default Message getResponse(StatusCode statusCode, String msg){
+        return Message.getDefaultMessage(CommonResp.of(statusCode,msg),getReturnType().getCode());
+    }
 
     default Message getResponse(StatusCode statusCode, Object ret){
         return Message.getDefaultMessage(CommonResp.of(statusCode,ret),getReturnType().getCode());
-
     }
 
     default void failure(ChannelHandlerContext ctx, String returnMessage){
         failure(ctx,Failure,returnMessage);
     }
 
-    default void failure(ChannelHandlerContext ctx, StatusCode statusCode, String returnMessage){
-        ctx.writeAndFlush(getResponse(statusCode,returnMessage));
+    default void failure(ChannelHandlerContext ctx, StatusCode statusCode, Object data){
+        ctx.writeAndFlush(getResponse(statusCode,data));
     }
 
     default void failure(ChannelHandlerContext ctx, StatusCode statusCode){
         failure(ctx, statusCode,null);
+    }
+    default void failure(ChannelHandlerContext ctx, StatusCode statusCode,String reason){
+        ctx.writeAndFlush(Message.getDefaultMessage(CommonResp.Failure(statusCode,reason),getReturnType().getCode()));
     }
 
 }

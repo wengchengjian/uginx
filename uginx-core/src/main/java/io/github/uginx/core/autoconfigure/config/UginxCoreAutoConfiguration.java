@@ -5,6 +5,7 @@ import io.github.uginx.core.protocol.handler.*;
 import io.github.uginx.core.support.HandlerDispatcher;
 import io.github.uginx.core.support.factory.CompressFactory;
 import io.github.uginx.core.support.factory.SerializerFactory;
+import io.github.uginx.core.utils.ApplicationContextUtil;
 import io.github.uginx.core.utils.compress.Compress;
 import io.github.uginx.core.utils.compress.impl.GzipCompress;
 import io.github.uginx.core.utils.serialize.Serializer;
@@ -39,6 +40,12 @@ public class UginxCoreAutoConfiguration {
     @ConditionalOnMissingBean
     public CompressFactory compressFactory(){
         return new CompressFactory();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public ApplicationContextUtil applicationContextUtil(){
+        return new ApplicationContextUtil();
     }
 
     /**
@@ -105,5 +112,7 @@ public class UginxCoreAutoConfiguration {
     public IdeaCheckHandler ideaCheckHandler(){
         return new IdeaCheckHandler();
     }
+
+
 
 }

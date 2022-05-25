@@ -1,6 +1,7 @@
 package io.github.uginx.core.model;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,11 +13,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class ProxyRequest {
     /**
-     * 需要代理的地址
+     * 需要代理的地址，默认为本地
      */
-    private String proxyHost;
+    private String proxyHost = "localhost";
 
     /**
      * 需要代理的端口
@@ -29,9 +31,9 @@ public class ProxyRequest {
     private Integer expectPort;
 
     /**
-     * 期待代理后的地址
+     * 期待代理后的地址，默认为本地
      */
-    private String expectHost;
+    private String expectHost = "localhost";
 
     /**
      * 客户端Key

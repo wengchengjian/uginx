@@ -30,11 +30,11 @@ public class CommonResp<T> {
         return Success(StatusCode.SUCCESS,null);
     }
 
-    private static <T> CommonResp<T> Success(StatusCode success, T data) {
+    public static <T> CommonResp<T> Success(StatusCode success, T data) {
         return Success(success.getCode(),success.getMsg(),data);
     }
 
-    private static <T> CommonResp<T> Success(Integer code, String msg, T data) {
+    public static <T> CommonResp<T> Success(Integer code, String msg, T data) {
         return new CommonResp<>(code,msg,data);
     }
 
@@ -47,15 +47,23 @@ public class CommonResp<T> {
         return Failure(StatusCode.Failure,null);
     }
 
-    private static <T> CommonResp<T> Failure(StatusCode failure, T data) {
+    public static <T> CommonResp<T> Failure(String msg){
+        return Failure(StatusCode.Failure.getCode(),msg,null);
+    }
+
+    public static <T> CommonResp<T> Failure(StatusCode failure, T data) {
         return Failure(failure.getCode(),failure.getMsg(),data);
     }
 
-    private static <T> CommonResp<T> Failure(Integer code, String msg, T data) {
+    public static <T> CommonResp<T> Failure(Integer code, String msg, T data) {
         return new CommonResp<>(code,msg,data);
     }
 
     public static CommonResp of(StatusCode statusCode, Object ret) {
         return new CommonResp(statusCode.getCode(),statusCode.getMsg(),ret);
+    }
+
+    public static CommonResp of(StatusCode statusCode, String msg) {
+        return new CommonResp(statusCode.getCode(),msg,null);
     }
 }

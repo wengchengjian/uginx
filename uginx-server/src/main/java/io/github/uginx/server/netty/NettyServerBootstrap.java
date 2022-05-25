@@ -4,6 +4,7 @@ import io.github.uginx.core.model.Container;
 import io.github.uginx.core.protocol.handler.IdeaCheckHandler;
 import io.github.uginx.core.protocol.handler.ProxyMessageDecoder;
 import io.github.uginx.core.protocol.handler.ProxyMessageEncoder;
+import io.github.uginx.core.support.HandlerDispatcher;
 import io.github.uginx.server.config.ServerProxyProperties;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.buffer.Unpooled;
@@ -45,10 +46,11 @@ public class NettyServerBootstrap implements Container {
     private final IdeaCheckHandler ideaCheckHandler;
 
     @NonNull
-    private final ServerProxyHandler proxyHandler;
+    private final HandlerDispatcher dispatcher;
 
     private ChannelFuture future;
 
+    @Override
     @SneakyThrows({InterruptedException.class})
     public void start(){
         int port = properties.getPort();
@@ -63,7 +65,7 @@ public class NettyServerBootstrap implements Container {
                         pipeline.addLast(decoder);
                         pipeline.addLast(encoder);
                         pipeline.addLast(ideaCheckHandler);
-                        pipeline.addLast(proxyHandler);
+                        pipeline.addLast(dispatcher);
                     }
                 });
         future = serverBootstrap.bind(port).sync();
@@ -71,6 +73,7 @@ public class NettyServerBootstrap implements Container {
         future.channel().closeFuture().sync();
         log.info("netty proxy server has started on {}. proxy is effective",port);
     }
+    @Override
     public void stop(){
         log.info("waiting for the last data send finished.");
         future.channel().writeAndFlush(Unpooled.EMPTY_BUFFER).addListener(new ChannelFutureListener() {

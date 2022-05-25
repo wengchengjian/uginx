@@ -1,7 +1,0 @@
-spring:
-  main:
-    allow-circular-references: true
-uginx:
-  servers:
-    - 8080
-    - 8081

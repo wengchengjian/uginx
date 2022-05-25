@@ -1,5 +1,6 @@
 package io.github.uginx.client.netty.handler.resp;
 
+import io.github.uginx.core.autoconfigure.annotation.Handler;
 import io.github.uginx.core.constants.RequestType;
 import io.github.uginx.core.constants.StatusCode;
 import io.github.uginx.core.model.CommonResp;
@@ -11,6 +12,7 @@ import io.netty.channel.ChannelHandlerContext;
  * @author wengchengjian
  * @date 2022/5/25-15:38
  */
+@Handler
 public class ClientProxyRespHandler implements ServiceHandler<Message<CommonResp<String>>> {
     @Override
     public RequestType getSupportTypes() {
