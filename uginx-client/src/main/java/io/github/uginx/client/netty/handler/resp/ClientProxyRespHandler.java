@@ -23,12 +23,14 @@ public class ClientProxyRespHandler implements ServiceHandler<Message<CommonResp
     public void doService(ChannelHandlerContext ctx, Message<CommonResp<String>> message) {
         CommonResp<String> res = message.getData();
 
+        String address = res.getData();
+
         Integer code = res.getCode();
 
         String msg = res.getMsg();
 
-        if(StatusCode.CLIENT_AUTH_SUCCESS.getCode().equals(code)){
-            log.info("Client proxy succuess");
+        if(StatusCode.CLIENT_PROXY_SUCCESS.getCode().equals(code)){
+            log.info("Client proxy success on {}",address);
         }else{
             log.error("Client proxy failed. Reason:{}",msg);
         }

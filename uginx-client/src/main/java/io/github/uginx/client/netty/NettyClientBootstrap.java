@@ -45,7 +45,7 @@ public class NettyClientBootstrap implements Container {
     @Override
     @SneakyThrows(InterruptedException.class)
     public synchronized void start() {
-        if(!ProxyClientChannelContextHolder.getChannel().isOpen()){
+        if(ProxyClientChannelContextHolder.getChannel()==null){
             bootstrap.group(workGroup).channel(NioSocketChannel.class).handler(new ChannelInitializer<SocketChannel>() {
                 @Override
                 protected void initChannel(SocketChannel ch) throws Exception {
@@ -56,23 +56,29 @@ public class NettyClientBootstrap implements Container {
                 }
             });
 
-            bootstrap.connect(properties.getServerHost(),properties.getServerPort()).sync().addListener(new ChannelFutureListener() {
+            ChannelFuture future = bootstrap.connect(properties.getServerHost(), properties.getServerPort()).sync().addListener(new ChannelFutureListener() {
                 @Override
                 public void operationComplete(ChannelFuture future) throws Exception {
-                    if(future.isSuccess()){
+                    if (future.isSuccess()) {
+                        log.info("proxy client has started on:{}",future.channel().localAddress());
                         // 保存客户端-服务端连接
                         ProxyClientChannelContextHolder.setChannel(future.channel());
                         // 建立连接以后发送认证请求
-                        sendAuthData(ProxyClientChannelContextHolder.getChannel(),properties.getClientKey());
+                        sendAuthData(ProxyClientChannelContextHolder.getChannel(), properties.getClientKey());
                     }
                 }
 
                 private void sendAuthData(Channel channel, String clientKey) {
+                    log.info("ready to send auth data to server");
+
                     Message<String> message = Message.getDefaultMessage(clientKey, RequestType.CLIENT_AUTH_REQUEST.getCode());
 
                     channel.writeAndFlush(message);
                 }
             });
+
+            future.channel().closeFuture();
+
         }
     }
 

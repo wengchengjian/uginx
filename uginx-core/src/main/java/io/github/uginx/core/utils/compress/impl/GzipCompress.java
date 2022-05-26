@@ -16,7 +16,6 @@ import java.util.zip.GZIPOutputStream;
  * @Date 2022/4/26 21:59
  * @Version 1.0.0
  */
-@Component
 public class GzipCompress implements Compress {
 
     private static final int BUFFER_SIZE = 1024 * 4;

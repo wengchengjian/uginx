@@ -33,7 +33,7 @@ public class RequestClient {
     public void sendProxyRequest(String proxyHost,Integer proxyPort,String expectHost,Integer expectPort){
         Channel channel = getChannel();
         if(channel.isWritable() &&channel.isOpen()){
-            ProxyRequest request = ProxyRequest.builder().expectHost(expectHost).expectPort(expectPort).proxyHost(proxyHost).proxyPort(proxyPort).build();
+            ProxyRequest request = ProxyRequest.builder().clientKey(proxyProperties.getClientKey()).expectHost(expectHost).expectPort(expectPort).proxyHost(proxyHost).proxyPort(proxyPort).build();
             Message<ProxyRequest> message = Message.getDefaultMessage(request, RequestType.CLIENT_CONNECT_REQUEST.getCode());
             channel.writeAndFlush(message);
         }

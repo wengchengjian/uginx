@@ -15,13 +15,12 @@ import org.springframework.context.annotation.ComponentScan;
  * @Date 2022/5/24 21:47
  * @Version 1.0.0
  */
+@SpringBootApplication
 @EnableProxyCoreModule
 @EnableConfigurationProperties(ServerProxyProperties.class)
-@SpringBootApplication
 public class ServerProxyApplication  {
     public static void main(String[] args) {
         ConfigurableApplicationContext run = SpringApplication.run(ServerProxyApplication.class, args);
-
     }
 
 

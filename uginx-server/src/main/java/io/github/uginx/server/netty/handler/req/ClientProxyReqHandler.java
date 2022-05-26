@@ -23,8 +23,7 @@ import io.netty.util.CharsetUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import static io.github.uginx.core.constants.StatusCode.Failure;
-import static io.github.uginx.core.constants.StatusCode.SUCCESS;
+import static io.github.uginx.core.constants.StatusCode.*;
 
 /**
  * @author wengchengjian
@@ -49,10 +48,11 @@ public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyReques
         return RequestType.CLIENT_CONNECT_RESPONSE;
     }
 
-    private static final Integer TIME_OUT = 5000;
 
     @Override
     public void doService(ChannelHandlerContext ctx, Message<ProxyRequest> message) {
+
+        log.info("received proxy request from {}.",ctx.channel().remoteAddress());
 
         ProxyRequest proxyRequest = message.getData();
 
@@ -66,38 +66,22 @@ public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyReques
 
         String clientKey = proxyRequest.getClientKey();
 
+        log.info("proxy client:{} expect server bind on {}:{} and proxy server {}:{}",ctx.channel().remoteAddress(),expectHost,expectPort,proxyHost,proxyPort);
         // 创建代理server
-        containerHelper.registerProxyServer(expectHost, expectPort).addListener(new ChannelFutureListener() {
+        containerHelper.registerProxyServer(expectHost, expectPort,proxyHost,proxyPort).addListener(new ChannelFutureListener() {
             @Override
             public void operationComplete(ChannelFuture server) throws Exception {
                 if(server.isSuccess()){
+                    log.info("bind proxy server on {} success",server.channel().localAddress());
                     // 保存新开启的代理server的channel
                     ProxyClientChannelManager.addClientProxyChannel(clientKey,expectHost,expectPort,server.channel());
-                    // 连接到目标服务器
-                    connectToTarget(server.channel(), proxyHost, proxyPort, TIME_OUT).addListener(new ChannelFutureListener() {
-                        @Override
-                        public void operationComplete(ChannelFuture future) throws Exception {
-                            if(future.isSuccess()){
-                                // 给代理server新增处理器
-                                server.channel().pipeline().addLast(new DataTransHandler(future.channel()));
-                                // 返回数据
-                                success(ctx, SUCCESS,String.format("%s:%d now is proxyed by %s:%d",proxyHost,proxyPort,expectHost,expectPort));
-                            }else{
-                                failure(ctx,Failure,String.format("{}:{} proxy failed",proxyHost,proxyPort));
-                            }
-                        }
-                    });
+                    log.info("{}:{} now is proxy by {}:{}",proxyHost,proxyPort,expectHost,expectPort);
+                    success(ctx, CLIENT_PROXY_SUCCESS,String.format("%s:%d now is proxyed by %s:%d",proxyHost,proxyPort,expectHost,expectPort));
                 }else{
                     failure(ctx,Failure,String.format("{}:{} proxy failed",proxyHost,proxyPort));
                 }
             }
         });
-
-        // 连接目标服务器
-
-
-
-
     }
 
     private Integer getServerPort(Integer expectPort) {
@@ -109,23 +93,6 @@ public class ClientProxyReqHandler implements ServiceHandler<Message<ProxyReques
             return expectHost;
         }
         return "localhost";
-    }
-
-    private ChannelFuture connectToTarget(final Channel channel, String host, int port, int  timeout){
-        return getChannelFuture(channel, host, port, timeout);
-    }
-
-    public static ChannelFuture getChannelFuture(Channel channel, String host, int port, int timeout) {
-        return new Bootstrap().group(channel.eventLoop())
-                .channel(NioSocketChannel.class)
-                .option(ChannelOption.CONNECT_TIMEOUT_MILLIS,timeout)
-                .handler(new ChannelInitializer<SocketChannel>() {
-                    @Override
-                    protected void initChannel(SocketChannel socketChannel) throws Exception {
-                        ChannelPipeline pipeline = socketChannel.pipeline();
-                        pipeline.addLast(new DataTransHandler(channel));
-                    }
-                }).connect(host,port);
     }
 
     private DefaultFullHttpResponse getResponse(HttpResponseStatus statusCode, String message) {

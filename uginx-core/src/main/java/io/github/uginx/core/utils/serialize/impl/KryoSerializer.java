@@ -18,7 +18,6 @@ import java.io.ByteArrayOutputStream;
  * @Version 1.0.0
  */
 
-@Component("kryo")
 public class KryoSerializer implements Serializer {
 
     private final ThreadLocal<Kryo> kryoThreadLocal = ThreadLocal.withInitial(()->{

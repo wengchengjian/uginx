@@ -1,6 +1,7 @@
 package io.github.uginx.server.support;
 
 
+import io.github.uginx.server.netty.handler.req.ProxyRequestHandler;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -9,15 +10,11 @@ import io.netty.channel.ChannelPipeline;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.http.HttpObjectAggregator;
-import io.netty.handler.codec.http.HttpServerCodec;
-import io.netty.handler.proxy.HttpProxyHandler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.stereotype.Component;
 
 import java.net.InetSocketAddress;
-import java.util.List;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * @author wengchengjian
@@ -25,6 +22,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 @Slf4j
 @RequiredArgsConstructor
+@Component
 public class ContainerHelper {
 
     private final NioEventLoopGroup bossGroup;
@@ -32,12 +30,14 @@ public class ContainerHelper {
     private final NioEventLoopGroup workGroup;
 
 
-    public ChannelFuture registerProxyServer(String host,Integer port){
+    public ChannelFuture registerProxyServer(String host,Integer port, String proxyHost, Integer proxyPort){
         ServerBootstrap proxyServer = createProxyServer();
 
         InetSocketAddress address = new InetSocketAddress(host, port);
 
-        initPipline(proxyServer);
+        InetSocketAddress proxyAdress = new InetSocketAddress(proxyHost,proxyPort);
+
+        initPipline(proxyServer,proxyAdress);
 
         return proxyServer.bind(address);
     }
@@ -54,14 +54,17 @@ public class ContainerHelper {
     }
 
     /**
-     *  设置处理器
+     * 设置处理器
+     *
      * @param bootstrap
+     * @param proxyAdress
      */
-    public  void initPipline(ServerBootstrap bootstrap){
+    public  void initPipline(ServerBootstrap bootstrap, InetSocketAddress proxyAdress){
         bootstrap.childHandler(new ChannelInitializer<SocketChannel>() {
             @Override
             protected void initChannel(SocketChannel ch) throws Exception {
                 // 什么都不做
+                ch.pipeline().addLast(new ProxyRequestHandler(proxyAdress));
             }
         });
     }
@@ -80,5 +83,4 @@ public class ContainerHelper {
     public void stop(){
 
     }
-
 }

@@ -19,7 +19,6 @@ import java.util.concurrent.ConcurrentHashMap;
  * @Date 2022/4/28 23:09
  * @Version 1.0.0
  */
-@Component
 @Slf4j
 public class CompressFactory {
 

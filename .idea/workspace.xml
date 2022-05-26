@@ -4,46 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ee2db594-3f7f-471c-adb0-5a8d59c80dd6" name="变更" comment="fix:修改项目信息">
-      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/cmd/ProxyCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/runner/ClientStartRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/utils/RequestClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/resources/application.yml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/cmd/ServerCommand.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/runner/ServerStartRunner.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/resources/application.yml" afterDir="false" />
+    <list default="true" id="ee2db594-3f7f-471c-adb0-5a8d59c80dd6" name="变更" comment="feat: 完成服务端代理，客户端代理工具已完成60%">
+      <change afterPath="$PROJECT_DIR$/.idea/dataSources.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/cmd/ClientCommand.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ProxyRequestHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-client/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/ClientProxyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/ClientProxyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/cmd/ProxyCommand.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/NettyClientBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/NettyClientBootstrap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/handler/resp/ClientProxyRespHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/handler/resp/ClientProxyRespHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/annotation/EnableProxyCoreModule.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/annotation/EnableProxyCoreModule.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/runner/ClientStartRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/utils/RequestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/utils/RequestClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/config/UginxCoreAutoConfiguration.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/autoconfigure/config/UginxCoreAutoConfiguration.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/CommonResp.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/CommonResp.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/ProxyRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/model/ProxyRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/constants/StatusCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/constants/StatusCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/ProxyMessageDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/protocol/handler/ProxyMessageDecoder.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/HandlerDispatcher.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/HandlerDispatcher.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/CompressFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/CompressFactory.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/RequestFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/RequestFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/SerializerFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/factory/SerializerFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/handler/ServiceHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/support/handler/ServiceHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/ApplicationContextUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/ApplicationContextUtil.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/compress/impl/GzipCompress.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/compress/impl/GzipCompress.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/serialize/impl/KryoSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-core/src/main/java/io/github/uginx/core/utils/serialize/impl/KryoSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-server/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/ServerProxyApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/ServerProxyApplication.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/cmd/ServerCommand.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/cmd/ServerCommand.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ClientProxyReqHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ClientProxyReqHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/utils/ArgValidationUtil.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/utils/ArgValidationUtil.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/resources/uginx.setting" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/pom.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/java/io/github/uginx/sh/UginxShellApplication.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/java/io/github/uginx/sh/command/HttpProxyCommand.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/java/io/github/uginx/sh/config/ServerProxyProperties.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/java/io/github/uginx/sh/config/ShellConfiguration.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/java/io/github/uginx/sh/runner/ProxyServerRunner.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/resources/application.yml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/uginx-sh/src/main/resources/uginx.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/runner/ServerStartRunner.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/support/ContainerHelper.java" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/support/ContainerHelper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/uginx-server/src/main/resources/application.yml" beforeDir="false" afterPath="$PROJECT_DIR$/uginx-server/src/main/resources/application.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -69,7 +61,7 @@
     <option name="generalSettings">
       <MavenGeneralSettings>
         <option name="useMavenConfig" value="true" />
-        <option name="userSettingsFile" value="E:\idea\IntelliJ IDEA 2022.1\plugins\maven\lib\maven3\conf\settings.xml" />
+        <option name="userSettingsFile" value="D:\idea\IntelliJ IDEA 2022.1\plugins\maven\lib\maven3\conf\settings.xml" />
       </MavenGeneralSettings>
     </option>
   </component>
@@ -81,27 +73,32 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "RequestMappingsPanelOrder0": "0",
-    "RequestMappingsPanelOrder1": "1",
-    "RequestMappingsPanelWidth0": "75",
-    "RequestMappingsPanelWidth1": "75",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "jdk.selected.JAVA_MODULE": "11",
-    "last_opened_file_path": "F:/repository/uginx/uginx-core/src/main/java/io/github/uginx/core",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "项目",
-    "project.structure.proportion": "0.0",
-    "project.structure.side.proportion": "0.0",
-    "settings.editor.selected.configurable": "MavenSettings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
+    &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
+    &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
+    &quot;RequestMappingsPanelWidth1&quot;: &quot;75&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;11&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/idea/IntelliJ IDEA 2022.1/plugins/maven/lib/maven3/conf/settings.xml&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;模块&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;MavenSettings&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;DatabaseDriversLRU&quot;: [
+      &quot;mysql&quot;
+    ]
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\repository\uginx\uginx-core\src\main\java\io\github\uginx\core" />
@@ -112,7 +109,39 @@
       <recent name="io.github.uginx.core.protocol.handler" />
     </key>
   </component>
-  <component name="RunManager" selected="Spring Boot.ServerProxyApplication">
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.ClientProxyApplication">
+    <configuration name="uginx [clean]" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="clean" />
+              </list>
+            </option>
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <configuration name="ClientProxyApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
       <module name="uginx-client" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="io.github.uginx.client.ClientProxyApplication" />
@@ -139,10 +168,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <list>
+      <item itemvalue="Maven.uginx [clean]" />
+      <item itemvalue="Spring Boot.ClientProxyApplication" />
+      <item itemvalue="Spring Boot.ServerProxyApplication" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.ServerProxyApplication" />
         <item itemvalue="Spring Boot.ClientProxyApplication" />
+        <item itemvalue="Spring Boot.ServerProxyApplication" />
       </list>
     </recent_temporary>
   </component>
@@ -164,6 +198,8 @@
       <workItem from="1653404505643" duration="87000" />
       <workItem from="1653442412435" duration="2136000" />
       <workItem from="1653445857560" duration="15435000" />
+      <workItem from="1653534893068" duration="4759000" />
+      <workItem from="1653544550189" duration="5610000" />
     </task>
     <task id="LOCAL-00001" summary="fix:修改项目信息">
       <created>1653399146868</created>
@@ -197,29 +233,39 @@
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/runner/ServerStartRunner.java</url>
-          <line>22</line>
-          <option name="timeStamp" value="4" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java</url>
-          <line>63</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/NettyServerBootstrap.java</url>
-          <line>57</line>
-          <option name="timeStamp" value="9" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="java-line">
           <url>jar://$USER_HOME$/.jdks/corretto-11.0.14.1/lib/src.zip!/jdk.internal.le/jdk/internal/org/jline/terminal/TerminalBuilder.java</url>
           <line>426</line>
           <option name="timeStamp" value="14" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/runner/ClientStartRunner.java</url>
+          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ClientProxyReqHandler.java</url>
+          <line>54</line>
+          <option name="timeStamp" value="31" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uginx-client/src/main/java/io/github/uginx/client/netty/handler/resp/ClientProxyRespHandler.java</url>
           <line>23</line>
-          <option name="timeStamp" value="17" />
+          <option name="timeStamp" value="42" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/ProxyClientChannelManager.java</url>
+          <line>31</line>
+          <option name="timeStamp" value="46" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/DataTransHandler.java</url>
+          <line>24</line>
+          <option name="timeStamp" value="47" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ProxyRequestHandler.java</url>
+          <line>37</line>
+          <option name="timeStamp" value="50" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/uginx-server/src/main/java/io/github/uginx/server/netty/handler/req/ProxyRequestHandler.java</url>
+          <line>45</line>
+          <option name="timeStamp" value="51" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

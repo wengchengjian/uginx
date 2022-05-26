@@ -67,7 +67,7 @@ public class ProxyMessageDecoder extends LengthFieldBasedFrameDecoder {
     @Override
     protected Message decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
         // 长度最小不能小于16
-        if(in.readableBytes() < MessageConstant.HEAD_LENGTH){
+        if(in.readableBytes() >= MessageConstant.HEAD_LENGTH){
             try{
                 return decodeFrame(in);
             }catch (Exception e){

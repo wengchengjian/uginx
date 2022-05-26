@@ -64,13 +64,14 @@ public class NettyServerBootstrap implements Container {
                         ChannelPipeline pipeline = socketChannel.pipeline();
                         pipeline.addLast(decoder);
                         pipeline.addLast(encoder);
-                        pipeline.addLast(ideaCheckHandler);
+//                        pipeline.addLast(ideaCheckHandler);
                         pipeline.addLast(dispatcher);
                     }
                 });
         future = serverBootstrap.bind(port).sync();
 
-        future.channel().closeFuture().sync();
+        // 等待关闭请求
+        future.channel().closeFuture();
         log.info("netty proxy server has started on {}. proxy is effective",port);
     }
     @Override

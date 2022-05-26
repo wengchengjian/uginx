@@ -62,7 +62,7 @@ public interface ServiceHandler<T> {
     }
 
     default void success(ChannelHandlerContext ctx, StatusCode statusCode){
-        success(ctx,statusCode);
+        success(ctx,statusCode,null);
     }
     default Message getResponse(StatusCode statusCode, String msg){
         return Message.getDefaultMessage(CommonResp.of(statusCode,msg),getReturnType().getCode());

@@ -2,9 +2,11 @@ package io.github.uginx.core.autoconfigure.config;
 
 
 import io.github.uginx.core.protocol.handler.*;
+import io.github.uginx.core.protocol.message.Message;
 import io.github.uginx.core.support.HandlerDispatcher;
 import io.github.uginx.core.support.factory.CompressFactory;
 import io.github.uginx.core.support.factory.SerializerFactory;
+import io.github.uginx.core.support.handler.ServiceHandler;
 import io.github.uginx.core.utils.ApplicationContextUtil;
 import io.github.uginx.core.utils.compress.Compress;
 import io.github.uginx.core.utils.compress.impl.GzipCompress;
@@ -13,6 +15,8 @@ import io.github.uginx.core.utils.serialize.impl.KryoSerializer;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+
+import java.util.List;
 
 /**
  * @Author 翁丞健
@@ -111,6 +115,12 @@ public class UginxCoreAutoConfiguration {
     @ConditionalOnMissingBean
     public IdeaCheckHandler ideaCheckHandler(){
         return new IdeaCheckHandler();
+    }
+
+    @Bean
+    @ConditionalOnMissingBean
+    public HandlerDispatcher dispatcher(List<ServiceHandler<Message>> serviceHandlers){
+        return new HandlerDispatcher(serviceHandlers);
     }
 
 

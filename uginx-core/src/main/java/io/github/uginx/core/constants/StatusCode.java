@@ -17,7 +17,11 @@ public enum StatusCode {
     SUCCESS(200, "成功"),
 
     CLIENT_AUTH_SUCCESS(201,"客户端认证成功"),
+
+    CLIENT_PROXY_SUCCESS(201,"客户端代理成功"),
     CLIENT_AUTH_Failure(101,"客户端认证失败"),
+
+    CLIENT_PROXY_Failure(101,"客户端代理失败"),
 
     CLIENT_TRANSFER_DATA_SUCCESS(202,"数据传输成功"),
 
