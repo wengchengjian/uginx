@@ -1,6 +1,7 @@
 package io.github.uginx.server.cmd;
 
 import io.github.uginx.server.netty.NettyServerBootstrap;
+import io.github.uginx.server.netty.ProxyClientChannelManager;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.shell.standard.ShellCommandGroup;
@@ -22,6 +23,9 @@ import java.util.List;
 public class ServerCommand {
 
     private final NettyServerBootstrap bootstrap;
+
+    private final ProxyClientChannelManager clientChannelManager;
+
     @ShellMethod("list the proxys ")
     public String list(){
         return "Hello";
@@ -30,5 +34,15 @@ public class ServerCommand {
     @ShellMethod("start server")
     public void start(){
         bootstrap.start();
+    }
+
+    @ShellMethod("stop server")
+    public void stop(){
+        bootstrap.stop();
+    }
+
+    @ShellMethod("ping ")
+    public void ping(String host,String port){
+
     }
 }

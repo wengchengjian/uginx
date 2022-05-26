@@ -1,5 +1,6 @@
 package io.github.uginx.client.cmd;
 
+import io.github.uginx.client.config.ClientProxyProperties;
 import io.github.uginx.client.netty.NettyClientBootstrap;
 import io.github.uginx.client.utils.RequestClient;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +21,10 @@ public class ClientCommand {
 
     private final NettyClientBootstrap bootstrap;
 
+    private final ClientProxyProperties properties;
+
     private final RequestClient client;
+
 
     @ShellMethod("start proxy client")
     public void start(){
@@ -31,4 +35,10 @@ public class ClientCommand {
     public void proxy(String host,Integer port){
         client.sendProxyRequest(host,port);
     }
+
+    @ShellMethod("show your Client Id")
+    public String who(){
+        return properties.getClientKey();
+    }
+
 }
